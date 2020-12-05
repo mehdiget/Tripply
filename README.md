@@ -3,7 +3,7 @@
 Hey Mr.Jt,
 
 # Bug Fixes: 
- - fix splash screen icon + change indicator color to Red instead of Blue
+ - Fix splash screen icon + change indicator color to Red instead of Blue
 
 # Updates: 
  - garbage old Home screen 
