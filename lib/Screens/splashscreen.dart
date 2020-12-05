@@ -1,5 +1,6 @@
 import 'dart:async';
-import 'home.dart';
+import 'dashboard.dart';
+import '../home.dart';
 import 'login.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/material.dart';
@@ -30,7 +31,7 @@ class _SplashScreenState extends State<SplashScreen> {
             .pushReplacement(MaterialPageRoute(builder: (context) => Login()));
       } else {
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => MyHomePage(user: _user)));
+            MaterialPageRoute(builder: (context) => Dashboard(user: _user)));
       }
     });
   }
@@ -48,15 +49,7 @@ class _SplashScreenState extends State<SplashScreen> {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                  begin: Alignment.bottomLeft,
-                  end: Alignment.topRight,
-                  colors: [
-                    HexColor("#4D7CFE").withOpacity(1),
-                    Color(0x5677FA).withOpacity(1)
-                  ]),
-            ),
+            decoration: BoxDecoration(color: HexColor("FC3E3F")),
           ),
           Column(
             mainAxisAlignment: MainAxisAlignment.start,
@@ -67,26 +60,13 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
-                      CircleAvatar(
-                        backgroundColor: Colors.white,
-                        radius: 50.0,
-                        child: Icon(
-                          Icons.location_on,
-                          color: HexColor("#4D7CFE"),
-                          size: 50.0,
-                        ),
-                      ),
                       Padding(
-                        padding: EdgeInsets.only(top: 10.0),
+                        padding: EdgeInsets.only(top: 160.0),
                       ),
-                      Text(
-                        "Tripply",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontWeight: FontWeight.bold,
-                            fontSize: 24.0,
-                            fontFamily: "Montserrat"),
-                      )
+                      Container(
+                        child: Image.asset("images/assets/splashi.png"),
+                        //  color: HexColor("#4D7CFE"),
+                      ),
                     ],
                   ),
                 ),
@@ -96,12 +76,12 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    CircularProgressIndicator(backgroundColor: Colors.white),
+                    CircularProgressIndicator(backgroundColor: Colors.white, valueColor:  AlwaysStoppedAnimation<Color>(Colors.red),),
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                     ),
                     Text(
-                      "Find your Trip",
+                      "Tripply",
                       softWrap: true,
                       textAlign: TextAlign.center,
                       style: TextStyle(

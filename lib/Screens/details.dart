@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'map.dart';
 import "dart:ui";
+import '../main.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,10 +11,18 @@ class Details extends StatelessWidget {
   String img;
   String country;
   String desc;
+  String way;
   double lat;
   double lng;
 
-  Details({this.place, this.img, this.country, this.desc, this.lat, this.lng});
+  Details(
+      {this.place,
+      this.img,
+      this.country,
+      this.desc,
+      this.way,
+      this.lat,
+      this.lng});
   @override
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
@@ -38,9 +47,7 @@ class Details extends StatelessWidget {
             children: <Widget>[
               Stack(children: [
                 Container(
-                  // margin: EdgeInsets.only(top: 10),
                   height: size.height * 0.4,
-                  // width: MediaQuery.of(context).size.width - 30,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                         begin: Alignment.topCenter,
@@ -49,11 +56,8 @@ class Details extends StatelessWidget {
                           Colors.black.withOpacity(1),
                           Colors.white.withOpacity(1)
                         ]),
-                    // borderRadius: BorderRadius.only(
-                    //     bottomRight: Radius.circular(47.0),
-                    //     bottomLeft: Radius.circular(47.0)),
                     image: DecorationImage(
-                      image: AssetImage(img),
+                      image: NetworkImage(img),
                       fit: BoxFit.cover,
                     ),
                   ),
@@ -147,8 +151,7 @@ class Details extends StatelessWidget {
                                       ),
                                     ),
                                     Text(
-                                      place +
-                                          " Every business has understood this fact that to stay competitive and rooted in the thriving market, they need to get aid from the ever-evolving technologies and create a digital presence of their business. However, to some extent, companies are looking forward to investing in the app development services accompanied by the low development cost and overlook the security aspects of the app.",
+                                      place + " " + desc,
                                       style: TextStyle(
                                         fontFamily: "Poppins",
                                         color: HexColor("#76787C"),
@@ -167,7 +170,16 @@ class Details extends StatelessWidget {
                                             fontSize: 18),
                                       ),
                                     ),
-                                        SizedBox(height: 2.0),
+                                    Text(
+                                      place + " " + way,
+                                      style: TextStyle(
+                                        fontFamily: "Poppins",
+                                        color: HexColor("#76787C"),
+                                        fontSize: 16.0,
+                                      ),
+                                      textAlign: TextAlign.justify,
+                                    ),
+                                    SizedBox(height: 2.0),
                                     Padding(
                                       padding: const EdgeInsets.only(top: 12.0),
                                       child: Text(
@@ -273,7 +285,7 @@ class Details extends StatelessWidget {
                   color: Colors.transparent,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   border: Border.all(
-                    color: HexColor("#4D7CFE"),
+                    color: Theme.of(context).primaryColor,
                     style: BorderStyle.solid,
                     width: 1.4,
                   ),
@@ -282,14 +294,14 @@ class Details extends StatelessWidget {
                 child: GestureDetector(
                   child: Material(
                     borderRadius: BorderRadius.circular(10),
-                    shadowColor: HexColor("#4D7CFE"),
+                   
                     elevation: 3.0,
                     child: Container(
                       width: size.width * 0.15,
 
                       child: IconButton(
                         icon: Icon(FlutterIcons.share_mdi,
-                            color: HexColor("#4D7CFE")),
+                            color: Theme.of(context).primaryColor),
                         onPressed: () {},
                       ),
                       //    onPressed: () {},
@@ -305,7 +317,7 @@ class Details extends StatelessWidget {
                   color: Colors.transparent,
                   borderRadius: BorderRadius.all(Radius.circular(10)),
                   border: Border.all(
-                    color: HexColor("#4D7CFE"),
+                    color: Theme.of(context).primaryColor,
                     style: BorderStyle.solid,
                     width: 1.4,
                   ),
@@ -314,14 +326,14 @@ class Details extends StatelessWidget {
                 child: GestureDetector(
                   child: Material(
                     borderRadius: BorderRadius.circular(10),
-                    shadowColor: HexColor("#718DFA"),
+               
                     elevation: 3.0,
                     child: Container(
                       width: size.width * 0.15,
 
                       child: IconButton(
                         icon: Icon(Icons.favorite_outline,
-                            color: HexColor("#4D7CFE")),
+                            color: Theme.of(context).primaryColor),
                         onPressed: () {},
                       ),
 
@@ -338,8 +350,8 @@ class Details extends StatelessWidget {
                 child: GestureDetector(
                   child: Material(
                     borderRadius: BorderRadius.circular(10),
-                    shadowColor: HexColor("#718DFA"),
-                    color: HexColor("#4D7CFE"),
+                   
+                    color: Theme.of(context).primaryColor,
                     elevation: 2.0,
                     child: MaterialButton(
                       child: Padding(

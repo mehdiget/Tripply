@@ -1,4 +1,4 @@
-import 'home.dart';
+import 'dashboard.dart';
 import 'login.dart';
 import 'package:flutter/material.dart';
 
@@ -51,7 +51,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             padding: EdgeInsets.only(top: 40.0, left: 20.0, right: 20.0),
             child: Column(
               children: [
-              
                 TextField(
                   decoration: InputDecoration(
                       labelText: 'EMAIL',
@@ -62,15 +61,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.green))),
                 ),
-               
-                
                 SizedBox(height: 50.0),
                 Container(
                   height: 40.0,
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
-                          builder: (BuildContext context) => new MyHomePage()));
+                          builder: (BuildContext context) => new Dashboard()));
                     },
                     child: Material(
                       borderRadius: BorderRadius.circular(20),

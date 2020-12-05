@@ -1,11 +1,14 @@
-import 'details.dart';
-import 'Login.dart';
-import 'favorite.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/services.dart';
+import 'package:hexcolor/hexcolor.dart';
+import 'Screens/details.dart';
+import 'Screens/Login.dart';
+import 'Screens/favorite.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'API/DataManager.dart';
 
 class MyHomePage extends StatefulWidget {
   final User user;
@@ -24,10 +27,12 @@ class _MyHomePageState extends State<MyHomePage> {
   ScrollController controller = ScrollController();
   bool closeTopContainer = false;
   double topContainer = 0;
+  List placesList = [];
 
   @override
   void initState() {
     super.initState();
+    fetchDatabaseList();
     controller.addListener(() {
       double value = controller.offset / 119;
 
@@ -38,81 +43,23 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
-  var LocationMorocco = [
-    {
-      'name': 'Casablanca',
-      'country': 'Morocco',
-      'dis': '12Km',
-      'image': 'images/slider/Casablanca.jpg',
-      'desc':
-          'is a Lorem ipsum dolor sit. eget tellus  ipsum dolor em tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium Lorem ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium a vitae risus',
-      'lat': '33.582680595186694',
-      'lng': '-7.590708343075337'
-    },
-    {
-      'name': 'Rabat',
-      'country': 'Morocco',
-      'dis': '50Km',
-      'image': 'images/slider/rabat.jpeg',
-      'desc':
-          'is a Lorem ipsum dolor sit. eget tellus  ipsum dolor em tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium Lorem ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium a vitae risus',
-      'lat': ' 33.97387333653138',
-      'lng': '-6.851147732424237'
-    },
-    {
-      'name': 'Agadir',
-      'country': 'Morocco',
-      'dis': '610Km',
-      'image': 'images/slider/agadir.jpeg',
-      'desc':
-          'is a Lorem ipsum dolor sit. eget tellus  ipsum dolor em tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium Lorem ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium a vitae risus',
-      'lat': '30.4249842342014',
-      'lng': '-9.588730584098732'
-    },
-    {
-      'name': 'Marrakech',
-      'country': 'Morocco',
-      'dis': '530Km',
-      'image': 'images/slider/marrakech.jpg',
-      'desc':
-          'is a Lorem ipsum dolor sit. eget tellus  ipsum dolor em tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium Lorem ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium a vitae risus',
-      'lat': '31.63928824720660',
-      'lng': '-7.983062072597654'
-    },
-    {
-      'name': 'Tanger',
-      'country': 'Morocco',
-      'dis': '210Km',
-      'image': 'images/slider/tanger.jpg',
-      'desc':
-          'is a Lorem ipsum dolor sit. eget tellus  ipsum dolor em tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium Lorem ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium a vitae risus',
-      'lat': '35.76363326306742',
-      'lng': '-5.833513919724872'
-    },
-    {
-      'name': 'Fes',
-      'country': 'Morocco',
-      'dis': '210Km',
-      'image': 'images/slider/fes.jpg',
-      'desc':
-          'is a Lorem ipsum dolor sit. eget tellus  ipsum dolor em tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium Lorem ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium a vitae risus',
-      'lat': '34.02233857490406',
-      'lng': '-5.006724433504774'
-    },
-    {
-      'name': 'Safi',
-      'country': 'Morocco',
-      'dis': '210Km',
-      'image': 'images/slider/safi.jpg',
-      'desc':
-          'is a Lorem ipsum dolor sit. eget tellus  ipsum dolor em tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium Lorem ipsum dolor sit. In a lorem tellus. curpis eget, fermentum est. Morbi in diam eget tellus ullamcorper pretium a vitae risus',
-      'lat': '0', //'32.30757851565482',
-      'lng': '0' //'-9.228400753298368'
-    },
-  ];
+  fetchDatabaseList() async {
+    dynamic resultPlaces = await DataManager().getPlacesList();
+    if (resultPlaces == null) {
+      print("Unable to retrieve asi mehdi");
+    } else {
+      setState(() {
+        print("able to retrieve asi mehdi");
+        placesList = resultPlaces;
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
+      statusBarColor: HexColor("#3352A9"),
+    ));
     final Size size = MediaQuery.of(context).size;
     final double categoryHeight = size.height * 0.35;
     return SafeArea(
@@ -236,138 +183,147 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     Expanded(
-                        child: ListView.builder(
-                            controller: controller,
-                            physics: new BouncingScrollPhysics(),
-                            itemCount: LocationMorocco.length,
-                            itemBuilder: (context, index) {
-                              double scale = 1.0;
-                              if (topContainer > 0.5) {
-                                scale = index + 0.5 - topContainer;
-                                if (scale < 0) {
-                                  scale = 0;
-                                } else if (scale > 1) {
-                                  scale = 1;
-                                }
+                      child: ListView.builder(
+                          controller: controller,
+                          physics: new BouncingScrollPhysics(),
+                          itemCount: placesList.length,
+                          itemBuilder: (context, index) {
+                            double scale = 1.0;
+                            if (topContainer > 0.5) {
+                              scale = index + 0.5 - topContainer;
+                              if (scale < 0) {
+                                scale = 0;
+                              } else if (scale > 1) {
+                                scale = 1;
                               }
-                              return Column(children: <Widget>[
-                                Opacity(
-                                  opacity: scale,
-                                  child: Transform(
-                                    transform: Matrix4.identity()
-                                      ..scale(scale, scale),
-                                    alignment: Alignment.bottomCenter,
-                                    child: Align(
-                                      heightFactor: 0.74,
-                                      alignment: Alignment.topCenter,
-                                      child: InkWell(
-                                          onTap: () {
-                                            Navigator.of(context).push(MaterialPageRoute(
-                                                builder: (BuildContext context) => new Details(
-                                                    place:
-                                                        LocationMorocco[index]
-                                                            ['name'],
-                                                    img: LocationMorocco[index]
-                                                        ['image'],
-                                                    country:
-                                                        LocationMorocco[index]
-                                                            ['country'],
-                                                    desc: LocationMorocco[index]
-                                                        ['desc'],
-                                                    lat: double.parse(
-                                                        LocationMorocco[index]
-                                                            ['lat']),
-                                                    lng:
-                                                        double.parse(LocationMorocco[index]['lng']))));
-                                          },
-                                          child: Container(
-                                            height: 130,
-                                            margin: const EdgeInsets.symmetric(
-                                                horizontal: 18, vertical: 7),
-                                            decoration: BoxDecoration(
-                                                borderRadius: BorderRadius.all(
-                                                    Radius.circular(20.0)),
-                                                color: Colors.white,
-                                                boxShadow: [
-                                                  BoxShadow(
-                                                      color: Colors.black
-                                                          .withAlpha(100),
-                                                      blurRadius: 10.0),
-                                                ]),
-                                            child: Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 15.0,
-                                                      vertical: 10),
-                                              child: Row(children: <Widget>[
-                                                Padding(
-                                                  padding:
-                                                      const EdgeInsets.only(
-                                                          bottom: 18.0),
-                                                  child: ClipRRect(
-                                                    borderRadius:
-                                                        BorderRadius.circular(
-                                                            8.0),
-                                                    child: Image.asset(
-                                                      LocationMorocco[index]
-                                                          ['image'],
-                                                      width: 90.0,
-                                                      height: 80.0,
-                                                      fit: BoxFit.fill,
-                                                    ),
+                            }
+                            return Column(children: <Widget>[
+                              Opacity(
+                                opacity: scale,
+                                child: Transform(
+                                  transform: Matrix4.identity()
+                                    ..scale(scale, scale),
+                                  alignment: Alignment.bottomCenter,
+                                  child: Align(
+                                    heightFactor: 0.7,
+                                    alignment: Alignment.topCenter,
+                                    child: InkWell(
+                                        onTap: () {
+                                          Navigator.of(context).push(MaterialPageRoute(
+                                              builder: (BuildContext context) =>
+                                                  new Details(
+                                                      place: placesList[index]
+                                                          ['place_name'],
+                                                      img: placesList[index]
+                                                          ['place_image'],
+                                                      country: placesList[index]
+                                                          ['place_city'],
+                                                      desc: placesList[index]
+                                                          ['place_description'],
+                                                      way: placesList[index]
+                                                          ['place_way'],
+                                                      lat: placesList[index]
+                                                          ['place_lat'],
+                                                      lng: placesList[index]
+                                                          ['place_lng'])));
+                                        },
+                                        child: Container(
+                                          height: 130,
+                                          margin: const EdgeInsets.symmetric(
+                                              horizontal: 18, vertical: 7),
+                                          decoration: BoxDecoration(
+                                              borderRadius: BorderRadius.all(
+                                                  Radius.circular(10.0)),
+                                              color: Colors.white,
+                                              boxShadow: [
+                                                BoxShadow(
+                                                    color: Colors.black
+                                                        .withAlpha(100),
+                                                    blurRadius: 7.0),
+                                              ]),
+                                          child: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 15.0, vertical: 12),
+                                            child: Row(children: <Widget>[
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    bottom: 18.0),
+                                                child: ClipRRect(
+                                                  borderRadius:
+                                                      BorderRadius.circular(
+                                                          8.0),
+                                                  child: Image.network(
+                                                    placesList[index]
+                                                        ['place_image'],
+                                                    width: 90.0,
+                                                    height: 80.0,
+                                                    fit: BoxFit.fill,
                                                   ),
                                                 ),
-                                                Padding(
-                                                    padding:
-                                                        const EdgeInsets.only(
-                                                            left: 14.0),
-                                                    child: Column(
-                                                      crossAxisAlignment:
-                                                          CrossAxisAlignment
-                                                              .start,
-                                                      children: <Widget>[
-                                                        Text(
-                                                          LocationMorocco[index]
-                                                              ['name'],
-                                                          style: const TextStyle(
-                                                              fontSize: 28,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .bold),
-                                                        ),
-                                                        Text(
-                                                          LocationMorocco[index]
-                                                              ['country'],
-                                                          style:
-                                                              const TextStyle(
-                                                                  fontSize: 17,
-                                                                  color: Colors
-                                                                      .grey),
-                                                        ),
-                                                        SizedBox(
-                                                          height: 3,
-                                                        ),
-                                                        Text(
-                                                          LocationMorocco[index]
-                                                              ['dis'],
-                                                          style: const TextStyle(
-                                                              fontSize: 24,
-                                                              color:
-                                                                  Colors.black,
-                                                              fontWeight:
-                                                                  FontWeight
-                                                                      .w500),
-                                                        )
-                                                      ],
-                                                    )),
-                                              ]),
-                                            ),
-                                          )),
-                                    ),
+                                              ),
+                                              Padding(
+                                                  padding:
+                                                      const EdgeInsets.only(
+                                                          left: 10.0),
+                                                  child: Column(
+                                                    crossAxisAlignment:
+                                                        CrossAxisAlignment
+                                                            .start,
+                                                    children: <Widget>[
+                                                      Text(
+                                                        placesList[index]
+                                                            ['place_name'],
+                                                        style: const TextStyle(
+                                                            fontFamily:
+                                                                'Montserrat',
+                                                            fontSize: 20,
+                                                            fontWeight:
+                                                                FontWeight
+                                                                    .bold),
+                                                      ),
+                                                      Text(
+                                                        placesList[index]
+                                                            ['place_city'],
+                                                        style: const TextStyle(
+                                                            fontFamily:
+                                                                'Montserrat',
+                                                            fontSize: 17,
+                                                            color: Colors.grey),
+                                                      ),
+                                                      SizedBox(
+                                                        height: 3,
+                                                      ),
+                                                      Row(
+                                                        children: [
+                                                          SvgPicture.asset(
+                                                              "images/assets/star_fill.svg"),
+                                                          Text(
+                                                            placesList[index]
+                                                                    ['rating']
+                                                                .toString(),
+                                                            style: const TextStyle(
+                                                                fontFamily:
+                                                                    'Montserrat',
+                                                                fontSize: 24,
+                                                                color: Colors
+                                                                    .black,
+                                                                fontWeight:
+                                                                    FontWeight
+                                                                        .w500),
+                                                          )
+                                                        ],
+                                                      )
+                                                    ],
+                                                  )),
+                                            ]),
+                                          ),
+                                        )),
                                   ),
-                                )
-                              ]);
-                            })),
+                                ),
+                              )
+                            ]);
+                          }),
+                    ),
                   ])),
             ],
           ),

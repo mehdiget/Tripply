@@ -1,5 +1,5 @@
 import 'signup.dart';
-import 'home.dart';
+import 'dashboard.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'forgetpassword.dart';
 import 'package:flutter/material.dart';
@@ -242,7 +242,7 @@ class _LoginState extends State<Login> {
         await user.sendEmailVerification();
       }
       Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (_) {
-        return MyHomePage(
+        return Dashboard(
           user: user,
         );
       }));
@@ -260,7 +260,7 @@ class _LoginState extends State<Login> {
     GoogleSignInAuthentication googleSignInAuthentication =
         await googleSignInAccount.authentication;
 
-    AuthCredential credential = GoogleAuthProvider.getCredential(
+    AuthCredential credential = GoogleAuthProvider.credential(
         idToken: googleSignInAuthentication.idToken,
         accessToken: googleSignInAuthentication.accessToken);
 
@@ -268,7 +268,7 @@ class _LoginState extends State<Login> {
 
     _user = result.user;
     Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => MyHomePage(user: _user)));
+        MaterialPageRoute(builder: (context) => Dashboard(user: _user)));
 
     setState(() {
       isSignIn = true;

@@ -154,7 +154,7 @@ class _Map extends State<Map> {
                                     bottomLeft: Radius.circular(10.0),
                                     topLeft: Radius.circular(10.0)),
                                 image: DecorationImage(
-                                    image: AssetImage(widget.img),
+                                    image: NetworkImage(widget.img),
                                     fit: BoxFit.cover))),
                         SizedBox(width: 5.0),
                         Column(

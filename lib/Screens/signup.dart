@@ -1,4 +1,4 @@
-import 'home.dart';
+import 'Dashboard.dart';
 import 'login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -218,13 +218,13 @@ class _SignupState extends State<Signup> {
       }
       await user.updateProfile(displayName: _displayName.text);
       final user1 = _auth.currentUser;
-      print("UID is : "+user.uid);
+      print("UID is : " + user.uid);
       await FirebaseFirestore.instance.collection('users').doc(user1.uid).set({
-        'name':  _displayName.text,
+        'name': _displayName.text,
       });
 
       Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => MyHomePage(
+          builder: (context) => Dashboard(
                 user: user1,
               )));
     } else {
