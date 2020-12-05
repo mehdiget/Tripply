@@ -11,4 +11,5 @@ Hey Mr.Jt,
  - Move all Firebase Code and Connections to "DataManager.dart" Class
 
 # New Features: 
- - Add New Profile screen UI with more features (Edit Profile, Privacy, Settings ,Share app ,Logout)
+ - Add New Profile screen UI with more features (Edit Profile, Privacy, Settings ,Share app ,Logout) 
+   Note : Profile screen still have many problems in UI especially onPressed Task 
