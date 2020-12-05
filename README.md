@@ -12,4 +12,4 @@ Hey Mr.Jt,
 
 # New Features: 
  - Add New Profile screen UI with more features (Edit Profile, Privacy, Settings ,Share app ,Logout) 
-   Note : Profile screen still have many problems in UI especially onPressed Task 
+   Note : Profile screen still have many backend problems especially onPressed Task 
