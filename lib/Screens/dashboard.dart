@@ -103,7 +103,7 @@ class _DashboardState extends State<Dashboard> {
                                   itemCount: placesList.length,
                                   options: CarouselOptions(
                                     autoPlayInterval:
-                                        const Duration(seconds: 5),
+                                        const Duration(seconds: 6),
                                     height: size.height * 0.45,
                                     // enlargeCenterPage: true,
                                     viewportFraction: 1,
