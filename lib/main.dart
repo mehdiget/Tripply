@@ -1,10 +1,14 @@
+import 'package:flutter/rendering.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'Screens/splashscreen.dart';
+import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 void main() async {
+    //RenderErrorBox.backgroundColor = Colors.transparent;
+    //RenderErrorBox.textStyle = ui.TextStyle(color: Colors.transparent);
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
       statusBarColor: HexColor("#FC3E3F"),
       

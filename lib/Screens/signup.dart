@@ -3,6 +3,7 @@ import 'login.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:hexcolor/hexcolor.dart';
 
 class Signup extends StatefulWidget {
   @override
@@ -28,6 +29,7 @@ class _SignupState extends State<Signup> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Form(
         key: _formKey,
         child: Scaffold(
@@ -39,28 +41,19 @@ class _SignupState extends State<Signup> {
                 child: Stack(
                   children: [
                     Container(
-                      padding: EdgeInsets.fromLTRB(15.0, 175.0, 0, 0),
-                      child: Text(
-                        "Signup",
-                        style: TextStyle(
-                            fontSize: 80.0, fontWeight: FontWeight.bold),
+                      // padding: EdgeInsets.only(left: 45, bottom: 0, top: 0,),
+                      child: Image.asset(
+                        'images/assets/khayma.png',
+                        width: size.width * 0.8,
                       ),
-                    ),
-                    Container(
-                      padding: EdgeInsets.fromLTRB(259.0, 175.0, 0, 0),
-                      child: Text(
-                        ".",
-                        style: TextStyle(
-                            color: Colors.green,
-                            fontSize: 80.0,
-                            fontWeight: FontWeight.bold),
-                      ),
+                      padding: EdgeInsets.only(left: size.width * 0.1),
                     ),
                   ],
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top: 40.0, left: 20.0, right: 20.0),
+                padding: EdgeInsets.only(
+                    left: size.width * 0.05, right: size.width * 0.05),
                 child: Column(
                   children: [
                     TextFormField(
@@ -74,11 +67,6 @@ class _SignupState extends State<Signup> {
                               color: Colors.grey),
                           focusedBorder: UnderlineInputBorder(
                               borderSide: BorderSide(color: Colors.green))),
-                      // onChanged: (value) {
-                      //   setState(() {
-                      //     _name = value.trim();
-                      //   });
-                      // },
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Please enter your name';
@@ -86,7 +74,7 @@ class _SignupState extends State<Signup> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: size.height * 0.025),
                     TextFormField(
                       controller: _emailController,
                       decoration: const InputDecoration(
@@ -96,7 +84,7 @@ class _SignupState extends State<Signup> {
                               fontWeight: FontWeight.bold,
                               color: Colors.grey),
                           focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.green))),
+                              borderSide: BorderSide(color: Colors.grey))),
                       validator: (String value) {
                         if (value.isEmpty) {
                           return 'Please enter your email';
@@ -104,7 +92,7 @@ class _SignupState extends State<Signup> {
                         return null;
                       },
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: size.height * 0.025),
                     TextFormField(
                       controller: _passwordController,
                       decoration: const InputDecoration(
@@ -123,14 +111,14 @@ class _SignupState extends State<Signup> {
                       },
                       obscureText: true,
                     ),
-                    SizedBox(height: 50.0),
+                    SizedBox(height: size.height * 0.08),
                     Container(
-                      height: 40.0,
+                      height: size.height * 0.06,
                       child: GestureDetector(
                         child: Material(
                           borderRadius: BorderRadius.circular(20),
-                          shadowColor: Colors.greenAccent,
-                          color: Colors.green,
+                          shadowColor: Colors.pinkAccent,
+                          color: HexColor("#FC3E3F"),
                           elevation: 3.0,
                           child: MaterialButton(
                             child: Center(
@@ -155,14 +143,14 @@ class _SignupState extends State<Signup> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height:size.height * 0.025),
                     Container(
-                      height: 40,
+                      height: size.height * 0.06,
                       color: Colors.transparent,
                       child: Container(
                         decoration: BoxDecoration(
                           border: Border.all(
-                            color: Colors.black,
+                            color: HexColor("#FC3E3F"),
                             style: BorderStyle.solid,
                             width: 1.0,
                           ),

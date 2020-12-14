@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'dashboard.dart';
-import '../home.dart';
 import 'login.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'package:flutter/material.dart';
@@ -64,7 +63,9 @@ class _SplashScreenState extends State<SplashScreen> {
                         padding: EdgeInsets.only(top: 160.0),
                       ),
                       Container(
-                        child: Image.asset("images/assets/splashi.png"),
+                        child: Image.asset("images/assets/splashi.png",
+                            color: Color.fromRGBO(255, 255, 255, 0.7),
+                            colorBlendMode: BlendMode.modulate),
                         //  color: HexColor("#4D7CFE"),
                       ),
                     ],
@@ -76,7 +77,10 @@ class _SplashScreenState extends State<SplashScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: <Widget>[
-                    CircularProgressIndicator(backgroundColor: Colors.white, valueColor:  AlwaysStoppedAnimation<Color>(Colors.red),),
+                    CircularProgressIndicator(
+                      backgroundColor: Colors.white,
+                      valueColor: AlwaysStoppedAnimation<Color>(Colors.red),
+                    ),
                     Padding(
                       padding: EdgeInsets.only(top: 20.0),
                     ),

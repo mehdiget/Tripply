@@ -24,6 +24,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
     return Form(
         key: _formKey,
         child: Scaffold(
@@ -33,41 +34,48 @@ class _LoginState extends State<Login> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
+                height: size.height * 0.4,
                 child: Stack(
                   children: [
                     Container(
-                      padding: EdgeInsets.fromLTRB(15.0, 110.0, 0, 0),
-                      child: Text(
-                        "Hello",
-                        style: TextStyle(
-                            fontFamily: 'Montserrat',
-                            fontSize: 80.0,
-                            fontWeight: FontWeight.bold),
-                      ),
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.cover,
+                              image: AssetImage("images/assets/colon.png"))),
+                      // padding: EdgeInsets.only(top: 380, right: 380,),
                     ),
                     Container(
-                      padding: EdgeInsets.fromLTRB(15.0, 175.0, 0, 0),
-                      child: Text(
-                        "There",
-                        style: TextStyle(
-                            fontSize: 80.0, fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                        padding: EdgeInsets.only(
+                          top: size.height * 0.2,
+                          left: size.width * 0.375,
+                        ),
+                        child: Text(
+                          "Tripply",
+                          style: TextStyle(
+                              fontSize: 41,
+                              fontWeight: FontWeight.bold,
+                              fontFamily: "Assistant"),
+                        )),
                     Container(
-                      padding: EdgeInsets.fromLTRB(220.0, 175.0, 0, 0),
-                      child: Text(
-                        ".",
-                        style: TextStyle(
-                            color: HexColor("#2B55F8"),
-                            fontSize: 80.0,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                        padding: EdgeInsets.only(
+                          left: size.width * 0.379,
+                          top: size.height * 0.267,
+                        ),
+                        child: Text(
+                          "Discover Moroccoland",
+                          style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.w600,
+                              fontFamily: "Assistant"),
+                        )),
                   ],
                 ),
               ),
               Container(
-                padding: EdgeInsets.only(top: 80.0, left: 20.0, right: 20.0),
+                padding: EdgeInsets.only(
+                    top: size.height * 0.03,
+                    left: size.width * 0.05,
+                    right: size.width * 0.05),
                 child: Column(
                   children: [
                     TextFormField(
@@ -75,17 +83,19 @@ class _LoginState extends State<Login> {
                       decoration: InputDecoration(
                           labelText: 'EMAIL',
                           labelStyle: TextStyle(
-                              fontFamily: 'Montserrat',
-                              fontWeight: FontWeight.bold,
-                              color: Colors.grey),
+                            fontFamily: 'Montserrat',
+                            fontWeight: FontWeight.bold,
+                            color: Colors.grey,
+                          ),
                           focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.green))),
+                              borderSide:
+                                  BorderSide(color: HexColor("#FC3E3F")))),
                       validator: (value) {
                         if (value.isEmpty) return 'Please enter your email';
                         return null;
                       },
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: size.height * 0.025),
                     TextFormField(
                       controller: _passwordController,
                       decoration: InputDecoration(
@@ -95,14 +105,15 @@ class _LoginState extends State<Login> {
                               fontWeight: FontWeight.bold,
                               color: Colors.grey),
                           focusedBorder: UnderlineInputBorder(
-                              borderSide: BorderSide(color: Colors.green))),
+                              borderSide:
+                                  BorderSide(color: HexColor("#FC3E3F")))),
                       obscureText: true,
                       validator: (value) {
                         if (value.isEmpty) return 'Please enter your password';
                         return null;
                       },
                     ),
-                    SizedBox(height: 5.0),
+                    SizedBox(height: size.height * 0.01),
                     Container(
                       alignment: Alignment(1.0, 0.0),
                       padding: EdgeInsets.only(top: 15, left: 20),
@@ -115,7 +126,7 @@ class _LoginState extends State<Login> {
                         child: Text(
                           "Forget Password?",
                           style: TextStyle(
-                            color: HexColor("#2B55F8"),
+                            color: HexColor("#FC3E3F"),
                             fontWeight: FontWeight.bold,
                             fontFamily: 'Montserrat',
                             decoration: TextDecoration.underline,
@@ -123,14 +134,14 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 40.0),
+                    SizedBox(height: size.height * 0.05),
                     Container(
-                      height: 40.0,
+                      height: size.height * 0.06,
                       child: GestureDetector(
                         child: Material(
                           borderRadius: BorderRadius.circular(20),
                           shadowColor: HexColor("#718DFA"),
-                          color: HexColor("#2B55F8"),
+                          color: HexColor("#FC3E3F"),
                           elevation: 3.0,
                           child: MaterialButton(
                             child: Center(
@@ -152,18 +163,18 @@ class _LoginState extends State<Login> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 20.0),
+                    SizedBox(height: size.height * 0.025),
                     Container(
-                      height: 40,
+                      height: size.height * 0.06,
                       color: Colors.transparent,
                       child: InkWell(
-                        onTap: (){
-                           handleSignIn();
+                        onTap: () {
+                          handleSignIn();
                         },
                         child: Container(
                           decoration: BoxDecoration(
                             border: Border.all(
-                              color: HexColor("#2B55F8"),
+                              color: HexColor("#FC3E3F"),
                               style: BorderStyle.solid,
                               width: 1.4,
                             ),
@@ -175,10 +186,10 @@ class _LoginState extends State<Login> {
                             children: [
                               Center(
                                 child: Image(
-                                  image: AssetImage("images/slider/google.png"),
+                                  image: AssetImage("images/assets/google.png"),
                                 ),
                               ),
-                              SizedBox(width: 10.0),
+                              SizedBox(width: size.height * 0.015),
                               Center(
                                 child: Text(
                                   "Login With Google",
@@ -199,7 +210,7 @@ class _LoginState extends State<Login> {
                   ],
                 ),
               ),
-              SizedBox(height: 15.0),
+              SizedBox(height: size.height * 0.015),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -218,7 +229,7 @@ class _LoginState extends State<Login> {
                     child: Text(
                       "Register",
                       style: TextStyle(
-                        color: HexColor("#2B55F8"),
+                        color: HexColor("#FC3E3F"),
                         fontWeight: FontWeight.bold,
                         fontFamily: 'Montserrat',
                       ),

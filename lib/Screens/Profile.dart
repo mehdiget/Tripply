@@ -1,25 +1,45 @@
+import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
+import 'package:flutter_tester/API/DataManager.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:hexcolor/hexcolor.dart';
 import 'dart:developer';
 import '../Components/profile_list_item.dart';
 import 'package:animated_theme_switcher/animated_theme_switcher.dart';
 import 'package:line_awesome_flutter/line_awesome_flutter.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-
 import 'dashboard.dart';
 import 'login.dart';
 
 class Profile extends StatefulWidget {
-  final User user;
+   final User user;
   Profile({this.user});
   @override
   _ProfileState createState() => _ProfileState();
 }
 
 class _ProfileState extends State<Profile> {
+  
+  int currentIndex;
   FirebaseAuth _auth = FirebaseAuth.instance;
+  
+
+  @override
+  void initState() {
+    super.initState();
+    
+    currentIndex = 1;
+  }
+
+  changePage(int index) {
+    setState(() {
+      currentIndex = index;
+    });
+  }
+
+
 
   @override
   Widget build(BuildContext context) {
@@ -112,18 +132,18 @@ class _ProfileState extends State<Profile> {
             size: size.width * 0.06,
           ),
           onPressed: () => Navigator.of(context).pushReplacement(
-                          MaterialPageRoute(builder: (context) => Dashboard(user: widget.user,))),
+              MaterialPageRoute(builder: (context) => Dashboard())),
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
       ),
       body: Column(
         children: <Widget>[
-          SizedBox(height: size.height * 0.05),
+          SizedBox(height: size.height * 0.04),
           header,
           Expanded(
             child: ListView(
-              padding: EdgeInsets.only(top: size.height * 0.05),
+              padding: EdgeInsets.only(top: size.height * 0.03),
               children: <Widget>[
                 ProfileListItem(
                   icon: LineAwesomeIcons.user_shield,

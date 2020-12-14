@@ -1,3 +1,5 @@
+import 'package:hexcolor/hexcolor.dart';
+
 import 'dashboard.dart';
 import 'login.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +12,8 @@ class ForgetPassword extends StatefulWidget {
 class _ForgetPasswordState extends State<ForgetPassword> {
   @override
   Widget build(BuildContext context) {
+    Size size = MediaQuery.of(context).size;
+
     return Scaffold(
       resizeToAvoidBottomPadding: false,
       body: Column(
@@ -19,36 +23,30 @@ class _ForgetPasswordState extends State<ForgetPassword> {
             child: Stack(
               children: [
                 Container(
-                  padding: EdgeInsets.fromLTRB(15.0, 110.0, 0, 0),
-                  child: Text(
-                    "Forget",
-                    style:
-                        TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold),
+                  padding: EdgeInsets.only(
+                    top: 355,
                   ),
+                  decoration: BoxDecoration(
+                      image: DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage("images/assets/colonia.png"))),
                 ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(15.0, 175.0, 0, 0),
-                  child: Text(
-                    "Password",
-                    style:
-                        TextStyle(fontSize: 60.0, fontWeight: FontWeight.bold),
+                Positioned(
+                  height: size.height * 0.33,
+                  width: size.width * 0.68,
+                  top: 100,
+                  left: 60,
+                  child: Container(
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            image: AssetImage("images/assets/forgetting.png"))),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(280.0, 175.0, 0, 0),
-                  child: Text(
-                    "?",
-                    style: TextStyle(
-                        color: Colors.green,
-                        fontSize: 60.0,
-                        fontWeight: FontWeight.bold),
-                  ),
-                ),
+                )
               ],
             ),
           ),
           Container(
-            padding: EdgeInsets.only(top: 40.0, left: 20.0, right: 20.0),
+            padding: EdgeInsets.only(top: size.height * 0.05 , left: size.width *0.05 , right: size.width *0.05),
             child: Column(
               children: [
                 TextField(
@@ -61,9 +59,9 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                       focusedBorder: UnderlineInputBorder(
                           borderSide: BorderSide(color: Colors.green))),
                 ),
-                SizedBox(height: 50.0),
+                SizedBox(height: size.height * 0.08),
                 Container(
-                  height: 40.0,
+                  height:size.height * 0.06,
                   child: GestureDetector(
                     onTap: () {
                       Navigator.of(context).push(MaterialPageRoute(
@@ -71,8 +69,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     },
                     child: Material(
                       borderRadius: BorderRadius.circular(20),
-                      shadowColor: Colors.greenAccent,
-                      color: Colors.green,
+                      shadowColor: HexColor("#FC3E3F"),
+                      color: HexColor("#FC3E3F"),
                       elevation: 3.0,
                       child: Center(
                         child: Text(
@@ -87,14 +85,14 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     ),
                   ),
                 ),
-                SizedBox(height: 20.0),
+                SizedBox(height: size.height * 0.025),
                 Container(
-                  height: 40,
+                  height: size.height * 0.06,
                   color: Colors.transparent,
                   child: Container(
                     decoration: BoxDecoration(
                       border: Border.all(
-                        color: Colors.black,
+                        color: HexColor("#FC3E3F"),
                         style: BorderStyle.solid,
                         width: 1.0,
                       ),
