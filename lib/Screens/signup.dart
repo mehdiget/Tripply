@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:hexcolor/hexcolor.dart';
+import 'package:lottie/lottie.dart';
 
 class Signup extends StatefulWidget {
   @override
@@ -40,14 +41,21 @@ class _SignupState extends State<Signup> {
               Container(
                 child: Stack(
                   children: [
-                    Container(
-                      // padding: EdgeInsets.only(left: 45, bottom: 0, top: 0,),
-                      child: Image.asset(
-                        'images/assets/khayma.png',
-                        width: size.width * 0.8,
+                    Padding(
+                      padding: EdgeInsets.only(
+                        right: 19,
+                        top: 29,
                       ),
+                    child : Container(
+                      // padding: EdgeInsets.only(left: 45, bottom: 0, top: 0,),
+                      child: Image.asset('images/assets/tente.gif',
+                     width: size.width *0.8,
+
+                     scale: 0.2,
+                      ),
+
                       padding: EdgeInsets.only(left: size.width * 0.1),
-                    ),
+                    )),
                   ],
                 ),
               ),
@@ -143,7 +151,7 @@ class _SignupState extends State<Signup> {
                         ),
                       ),
                     ),
-                    SizedBox(height:size.height * 0.025),
+                    SizedBox(height: size.height * 0.025),
                     Container(
                       height: size.height * 0.06,
                       color: Colors.transparent,

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_tester/API/DataManager.dart';
 import 'package:flutter_tester/Components/profile_list_item.dart';
@@ -103,7 +101,7 @@ class _ProfilexState extends State<Profilex> {
                                       top: 2,
                                     ),
                                     child: Text(
-                                      user.displayName == null
+                                      user.displayName.isEmpty
                                           ? Image.asset(
                                               "images/assets/placeholder_GIF.gif")
                                           : user.displayName,

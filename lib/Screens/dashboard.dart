@@ -44,7 +44,7 @@ class _DashboardState extends State<Dashboard> {
   @override
   void initState() {
     super.initState();
-   // fetchCurrentUser();
+    // fetchCurrentUser();
     fetchDatabaseList();
     currentIndex = 0;
   }
@@ -96,12 +96,14 @@ class _DashboardState extends State<Dashboard> {
                       Stack(
                         children: [
                           placesList.isEmpty
-                              ? Image.asset("images/assets/placeholder_GIF.gif")
+                              ? Image.asset(
+                                  "images/assets/placeholder_GIF.gif",
+                                )
                               : CarouselSlider.builder(
                                   itemCount: placesList.length,
                                   options: CarouselOptions(
                                     autoPlayInterval:
-                                        const Duration(seconds: 6),
+                                        const Duration(seconds: 5),
                                     height: size.height * 0.45,
                                     // enlargeCenterPage: true,
                                     viewportFraction: 1,

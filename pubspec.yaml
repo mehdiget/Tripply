@@ -44,6 +44,7 @@ dependencies:
   bubble_bottom_bar: ^1.2.0
   font_awesome_flutter: ^8.10.0
   combos: ^1.2.0
+  lottie: ^0.7.0+1
 
 
 dev_dependencies:
@@ -72,8 +73,10 @@ flutter:
     - images/assets/khayma.png
     - images/assets/colonia.png
     - images/assets/colon.png
-    - images/assets/forgetting.png
     - images/assets/person.jpg
+    - images/assets/forgetting.png
+    - images/assets/tente.gif
+    
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.
