@@ -119,7 +119,11 @@ class _FavoriteState extends State<Favorite> with TickerProviderStateMixin {
                   ),
                   Expanded(
                       child: favoritePlaces.isEmpty
-                          ? Image.asset("images/assets/placeholder_GIF.gif")
+                          ? Padding(
+                              padding:
+                                  EdgeInsets.only(bottom: size.height * 0.3),
+                              child: Image.asset("images/assets/loading3.gif"),
+                            )
                           : AnimatedList(
                               key: _key,
                               initialItemCount: favoritePlaces.length,

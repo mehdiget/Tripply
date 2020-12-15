@@ -91,105 +91,110 @@ class _ProfilexState extends State<Profilex> {
                             color: Colors.black87,
                           ),
                         ),
-                        Padding(
-                            padding: EdgeInsets.only(top: size.height * 0.03),
-                            child: Column(
-                              children: [
-                                Center(
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                      top: 2,
-                                    ),
-                                    child: Text(
-                                      user.displayName.isEmpty
-                                          ? Image.asset(
-                                              "images/assets/placeholder_GIF.gif")
-                                          : user.displayName,
-                                      style: TextStyle(
-                                        fontSize: 23,
-                                        fontFamily: 'Quicksand',
-                                        fontWeight: FontWeight.w600,
+                        user == null
+                            ? CircularProgressIndicator(
+                                backgroundColor: Colors.white,
+                                valueColor:
+                                    AlwaysStoppedAnimation<Color>(Colors.red),
+                              )
+                            : Padding(
+                                padding:
+                                    EdgeInsets.only(top: size.height * 0.03),
+                                child: Column(
+                                  children: [
+                                    Center(
+                                      child: Container(
+                                        padding: EdgeInsets.only(
+                                          top: 2,
+                                        ),
+                                        child: Text(
+                                          user.displayName,
+                                          style: TextStyle(
+                                            fontSize: 23,
+                                            fontFamily: 'Quicksand',
+                                            fontWeight: FontWeight.w600,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  height: 2,
-                                ),
-                                Center(
-                                  child: Container(
-                                    padding: EdgeInsets.only(
-                                      top: 2,
+                                    SizedBox(
+                                      height: 2,
                                     ),
-                                    child: Text(
-                                      user.email,
-                                      style: TextStyle(
-                                        fontSize: 18,
-                                        fontFamily: 'Quicksand',
-                                        fontWeight: FontWeight.normal,
+                                    Center(
+                                      child: Container(
+                                        padding: EdgeInsets.only(
+                                          top: 2,
+                                        ),
+                                        child: Text(
+                                          user.email,
+                                          style: TextStyle(
+                                            fontSize: 18,
+                                            fontFamily: 'Quicksand',
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                ),
-                                Container(
-                                    height: size.height,
-                                    width: size.width,
-                                    child: Column(
-                                      children: [
-                                        Expanded(
-                                            child: ListView(
-                                          padding: EdgeInsets.only(
-                                              top: size.height * 0.04),
-                                          children: <Widget>[
-                                            ProfileListItem(
-                                              icon: LineAwesomeIcons.edit,
-                                              text: 'Edit Profile',
-                                              tap: () {
-                                                //Just TEST !!!!!!!
-                                                Navigator.of(context).push(
-                                                    MaterialPageRoute(
-                                                        builder: (BuildContext
-                                                                context) =>
-                                                            new Dashboard(
-                                                              user: user,
-                                                            )));
-                                              },
-                                            ),
-                                            ProfileListItem(
-                                              icon:
-                                                  LineAwesomeIcons.user_shield,
-                                              text: 'Privacy',
-                                            ),
-                                            ProfileListItem(
-                                              icon: LineAwesomeIcons.user_plus,
-                                              text: 'Invite a Friend',
-                                            ),
-                                            ProfileListItem(
-                                              icon: LineAwesomeIcons
-                                                  .question_circle,
-                                              text: 'Help & Support',
-                                            ),
-                                            ProfileListItem(
-                                              icon: LineAwesomeIcons
-                                                  .alternate_sign_out,
-                                              text: 'Logout',
-                                              tap: () {
-                                                _signOut().whenComplete(() {
-                                                  Navigator.of(context)
-                                                      .pushReplacement(
-                                                          MaterialPageRoute(
-                                                              builder:
-                                                                  (context) =>
-                                                                      Login()));
-                                                });
-                                              },
-                                            ),
+                                    Container(
+                                        height: size.height,
+                                        width: size.width,
+                                        child: Column(
+                                          children: [
+                                            Expanded(
+                                                child: ListView(
+                                              padding: EdgeInsets.only(
+                                                  top: size.height * 0.04),
+                                              children: <Widget>[
+                                                ProfileListItem(
+                                                  icon: LineAwesomeIcons.edit,
+                                                  text: 'Edit Profile',
+                                                  tap: () {
+                                                    //Just TEST !!!!!!!
+                                                    Navigator.of(context).push(
+                                                        MaterialPageRoute(
+                                                            builder: (BuildContext
+                                                                    context) =>
+                                                                new Dashboard(
+                                                                  user: user,
+                                                                )));
+                                                  },
+                                                ),
+                                                ProfileListItem(
+                                                  icon: LineAwesomeIcons
+                                                      .user_shield,
+                                                  text: 'Privacy',
+                                                ),
+                                                ProfileListItem(
+                                                  icon: LineAwesomeIcons
+                                                      .user_plus,
+                                                  text: 'Invite a Friend',
+                                                ),
+                                                ProfileListItem(
+                                                  icon: LineAwesomeIcons
+                                                      .question_circle,
+                                                  text: 'Help & Support',
+                                                ),
+                                                ProfileListItem(
+                                                  icon: LineAwesomeIcons
+                                                      .alternate_sign_out,
+                                                  text: 'Logout',
+                                                  tap: () {
+                                                    _signOut().whenComplete(() {
+                                                      Navigator.of(context)
+                                                          .pushReplacement(
+                                                              MaterialPageRoute(
+                                                                  builder:
+                                                                      (context) =>
+                                                                          Login()));
+                                                    });
+                                                  },
+                                                ),
+                                              ],
+                                            ))
                                           ],
-                                        ))
-                                      ],
-                                    )),
-                              ],
-                            ))
+                                        )),
+                                  ],
+                                ))
                       ]))),
                 ),
                 Positioned(
