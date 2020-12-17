@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_tester/API/DataManager.dart';
 import 'package:flutter_tester/Components/StarsWidget.dart';
 import 'package:flutter_icons/flutter_icons.dart';
-import 'package:hexcolor/hexcolor.dart';
+import 'package:hexcolor/hexcolor.dart';;
 
 import 'details.dart';
 
