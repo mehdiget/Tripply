@@ -1,11 +1,9 @@
 import 'dart:async';
-import 'dart:collection';
-import 'dart:io';
+
 
 import 'package:flutter/material.dart';
 import 'package:flutter_tester/API/DataManager.dart';
 import 'package:flutter_tester/Components/StarsWidget.dart';
-import 'dashboard.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:hexcolor/hexcolor.dart';
 
@@ -20,7 +18,6 @@ class _FavoriteState extends State<Favorite> with TickerProviderStateMixin {
   final GlobalKey<AnimatedListState> _key = GlobalKey<AnimatedListState>();
 
   AnimationController _animationController;
-  AnimationController _animationDeleteController;
 
   List favoritePlaces = [];
 
@@ -206,8 +203,8 @@ class _FavoriteState extends State<Favorite> with TickerProviderStateMixin {
                                         Row(
                                           children: [
                                             Container(
-                                              height: size.height * 0.019,
-                                              width: size.width * 0.32,
+                                              height: size.height * 0.05,
+                                              width: size.width * 0.36,
                                               child: StarsWidget(
                                                   rating: double.parse(
                                                       favoritePlaces[index]
@@ -215,16 +212,16 @@ class _FavoriteState extends State<Favorite> with TickerProviderStateMixin {
                                             ),
                                             Padding(
                                               padding: EdgeInsets.only(
-                                                  top: size.height * 0.012),
+                                                  top: size.height * 0.011),
                                               child: Container(
-                                                height: size.height * 0.03,
-                                                width: size.width * 0.08,
+                                                height: size.height * 0.04,
+                                                width: size.width * 0.059,
                                                 child: Text(
                                                   favoritePlaces[index]
                                                       ["rating"],
                                                   style: TextStyle(
                                                       fontFamily: "Barlow",
-                                                      fontSize: 17,
+                                                      fontSize: 14,
                                                       color: Colors.grey,
                                                       fontWeight:
                                                           FontWeight.w600),
@@ -240,7 +237,7 @@ class _FavoriteState extends State<Favorite> with TickerProviderStateMixin {
                           ),
                           Padding(
                               padding: EdgeInsets.only(
-                                  left: size.width * 0.04, bottom: 1),
+                                  right: size.width * 0.0, bottom: 1),
                               child: Container(
                                 child: IconButton(
                                   icon: new Icon(

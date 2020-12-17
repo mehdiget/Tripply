@@ -1,12 +1,10 @@
 import 'dart:ui';
 import 'package:flutter/rendering.dart';
 import 'package:bubble_bottom_bar/bubble_bottom_bar.dart';
-import 'Profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:flutter_tester/API/DataManager.dart';
 import 'package:flutter_tester/Components/StarsWidget.dart';
@@ -17,7 +15,6 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'details.dart';
 import 'discover.dart';
 import 'favorite.dart';
-import 'login.dart';
 import 'profilex.dart';
 
 class Dashboard extends StatefulWidget {
@@ -27,7 +24,8 @@ class Dashboard extends StatefulWidget {
   _DashboardState createState() => _DashboardState();
 }
 
-class _DashboardState extends State<Dashboard> {
+class _DashboardState extends State<Dashboard>
+    with AutomaticKeepAliveClientMixin<Dashboard> {
 //GifController controller= GifController(vsync: this);
 
   double Slider_rating;
@@ -36,10 +34,12 @@ class _DashboardState extends State<Dashboard> {
   List placesList = [];
   List collectionList = [];
 
-  final List<Widget> _pages = [Dashboard(), Favorite(), Profile()];
+
   final CollectionScroller collectionScroller = CollectionScroller();
   final Category categoryScroller = new Category();
   final LatestPlaces latestPlaces = new LatestPlaces();
+
+  final PageStorageBucket bucket = PageStorageBucket();
 
   @override
   void initState() {
@@ -67,15 +67,11 @@ class _DashboardState extends State<Dashboard> {
     }
   }
 
-  // fetchCurrentUser() async {
-  //   final User userX = await DataManager().getCurrentUser();
-  //   setState(() {
-  //     user = userX;
-  //   });
-  // }
+  bool get wantKeepAlive => true;
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     String str = widget.user.displayName;
     var arr = [];
     arr = str.split(" ");
@@ -133,7 +129,7 @@ class _DashboardState extends State<Dashboard> {
                                                 Row(
                                                   children: [
                                                     Container(
-                                                      width: size.width * 0.685,
+                                                      width: size.width * 0.65,
                                                       padding: EdgeInsets.only(
                                                           top: size.height *
                                                                   0.11 -
@@ -152,7 +148,7 @@ class _DashboardState extends State<Dashboard> {
                                                                       .w600)),
                                                     ),
                                                     Container(
-                                                      width: size.width * 0.31,
+                                                      width: size.width * 0.35,
                                                       padding: EdgeInsets.only(
                                                         top:
                                                             size.height * 0.11 -
@@ -398,13 +394,8 @@ class _DashboardState extends State<Dashboard> {
                   user: widget.user,
                 )
               : (currentIndex == 2)
-                  ? Favorite()
+                  ? PageStorage(bucket: bucket, child: Favorite())
                   : Discover(),
-      //    : Icon(
-      //             Icons.access_time,
-      //             size: 150.0,
-      //             color: Colors.deepPurple,
-      //           ),
       bottomNavigationBar: BubbleBottomBar(
         opacity: 0.2,
         backgroundColor: Colors.white,
@@ -475,6 +466,7 @@ class CollectionScroller extends StatefulWidget {
 
 class _CollectionScrollerState extends State<CollectionScroller> {
   List collectionList = [];
+  final PageStorageBucket bucket = PageStorageBucket();
 
   @override
   void initState() {
@@ -498,79 +490,85 @@ class _CollectionScrollerState extends State<CollectionScroller> {
   Widget build(BuildContext context) {
     final double collectionHeight =
         MediaQuery.of(context).size.height * 0.30 - 50;
-    return Column(children: <Widget>[
-      Expanded(
-          child: ListView.builder(
-              padding: const EdgeInsets.symmetric(horizontal: 13, vertical: 0),
-              physics: BouncingScrollPhysics(),
-              scrollDirection: Axis.horizontal,
-              itemCount: collectionList.length,
-              itemBuilder: (context, index) {
-                return InkWell(
-                  child: Container(
-                    child: Row(
-                      children: <Widget>[
-                        InkWell(
-                          onTap: () {
-                            print("Container clicked");
-                          },
-                          child: Container(
-                            width: 140,
-                            margin: EdgeInsets.only(right: 20),
-                            height: collectionHeight,
-                            decoration: BoxDecoration(
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: Colors.black.withAlpha(90),
-                                      blurRadius: 5.0),
-                                ],
-                                image: new DecorationImage(
-                                  image: new CachedNetworkImageProvider(
-                                    collectionList[index]['collection_image'],
+    return PageStorage(
+        bucket: bucket,
+        child: Column(children: <Widget>[
+          Expanded(
+              child: ListView.builder(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 13, vertical: 0),
+                  physics: BouncingScrollPhysics(),
+                  scrollDirection: Axis.horizontal,
+                  itemCount: collectionList.length,
+                  itemBuilder: (context, index) {
+                    return InkWell(
+                      child: Container(
+                        child: Row(
+                          children: <Widget>[
+                            InkWell(
+                              onTap: () {
+                                print("Container clicked");
+                              },
+                              child: Container(
+                                width: 140,
+                                margin: EdgeInsets.only(right: 20),
+                                height: collectionHeight,
+                                decoration: BoxDecoration(
+                                    boxShadow: [
+                                      BoxShadow(
+                                          color: Colors.black.withAlpha(90),
+                                          blurRadius: 5.0),
+                                    ],
+                                    image: new DecorationImage(
+                                      image: new CachedNetworkImageProvider(
+                                        collectionList[index]
+                                            ['collection_image'],
+                                      ),
+                                      fit: BoxFit.cover,
+                                    ),
+                                    borderRadius: BorderRadius.all(
+                                        Radius.circular(10.0))),
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                      gradient: LinearGradient(
+                                          begin: Alignment.topCenter,
+                                          end: Alignment.bottomCenter,
+                                          colors: [
+                                            Colors.black.withOpacity(0.72),
+                                            Colors.white.withOpacity(0.1)
+                                          ]),
+                                      borderRadius: BorderRadius.all(
+                                          Radius.circular(10.0))),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: <Widget>[
+                                        Text(
+                                          collectionList[index]
+                                              ['collection_name'],
+                                          // "Most\nFavorites",
+                                          style: TextStyle(
+                                              fontSize: 25,
+                                              color: Colors.white,
+                                              fontWeight: FontWeight.bold),
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                      ],
+                                    ),
                                   ),
-                                  fit: BoxFit.cover,
-                                ),
-                                borderRadius:
-                                    BorderRadius.all(Radius.circular(10.0))),
-                            child: Container(
-                              decoration: BoxDecoration(
-                                  gradient: LinearGradient(
-                                      begin: Alignment.topCenter,
-                                      end: Alignment.bottomCenter,
-                                      colors: [
-                                        Colors.black.withOpacity(0.72),
-                                        Colors.white.withOpacity(0.1)
-                                      ]),
-                                  borderRadius:
-                                      BorderRadius.all(Radius.circular(10.0))),
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Text(
-                                      collectionList[index]['collection_name'],
-                                      // "Most\nFavorites",
-                                      style: TextStyle(
-                                          fontSize: 25,
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold),
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                  ],
                                 ),
                               ),
                             ),
-                          ),
+                          ],
                         ),
-                      ],
-                    ),
-                  ),
-                );
-              })),
-    ]);
+                      ),
+                    );
+                  })),
+        ]));
   }
 }
 
@@ -612,7 +610,7 @@ class _CategoryState extends State<Category> {
               scrollDirection: Axis.horizontal,
               itemCount: CategoryList.length,
               itemBuilder: (context, index) {
-                var CategoryIcon = CategoryList[index]['category_icon'];
+
                 return InkWell(
                   child: Container(
                     child: Row(
