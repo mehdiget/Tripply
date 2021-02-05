@@ -1,3 +1,4 @@
 # Tripply V1.1
 
-![Tripply Screenshot](https://user-images.githubusercontent.com/44551268/107061294-4b5e4c00-67d8-11eb-976b-91c8c6010d58.png)
+![Tripply Screenshot1](https://user-images.githubusercontent.com/44551268/107062072-2fa77580-67d9-11eb-9aca-75d808252873.png)
+
