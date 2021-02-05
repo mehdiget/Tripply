@@ -4,3 +4,21 @@ Tripply is an android/ios app made for tripers where you can find places such as
 
 ![Tripply Screenshot1](https://user-images.githubusercontent.com/44551268/107062072-2fa77580-67d9-11eb-9aca-75d808252873.png)
 
+# Tech stack & Open-source libraries
+Minimum SDK level 21
+
+Flutter based, Coroutines + Flow for asynchronous.
+
+Hilt (alpha) for dependency injection.
+
+JetPack
+
+LiveData - notify domain layer data to views.
+Lifecycle - dispose of observing data when lifecycle state changes.
+ViewModel - UI related data holder, lifecycle aware.
+Room Persistence - construct a database using the abstract layer.
+Architecture
+
+MVVM Architecture (View - DataBinding - ViewModel - Model)
+Repository pattern
+
