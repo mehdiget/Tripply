@@ -22,4 +22,5 @@ JetPack
 
 MVVM Architecture (View - DataBinding - ViewModel - Model)
 Repository pattern
-
+# Find this repository useful? ❤️
+follow me for my next creations! 🤩
